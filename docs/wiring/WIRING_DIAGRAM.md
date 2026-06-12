@@ -30,8 +30,8 @@ D6  ---------------------->| Pink LED 3           |
 D9  ---------------------->| Pink LED 4           |
 D10 ---------------------->| Pink LED 5           |
                            |                      |
-A4  <--------------------->| SDA (OLED)           |
-A5  <--------------------->| SCL (OLED)           |
+A4  ---------------------->| SDA (OLED)           |
+A5  ---------------------->| SCL (OLED)           |
                            |                      |
 5V  ---------------------->| OLED VDD             |
 5V  ---------------------->| White LED            |
@@ -126,6 +126,6 @@ D7 -> Toggle -> Ground
 
 Uses internal pull-up.
 
-Toggle up/down changes wake state.
+Toggle position changes software wake/sleep state.
 
-Not hard power.
+Power remains connected.
