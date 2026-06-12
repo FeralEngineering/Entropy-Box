@@ -2,7 +2,7 @@
 
 This is the full physical component list for Entropy Box.
 
-Some parts can be swapped, but the overall structure matters.
+Some components can be substituted, but the current layout is built around this hardware set.
 
 ---
 
@@ -160,7 +160,7 @@ Current build uses a simple floating wire.
 
 Used to convert the recessed Arduino Uno USB-B port into a cleaner external USB-C inlet.
 
-Mounted flush in the enclosure wall.
+Mounted through the enclosure wall and extends slightly outward from the case.
 
 Strongly recommended for enclosure builds.
 
