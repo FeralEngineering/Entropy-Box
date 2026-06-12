@@ -107,7 +107,7 @@ Arduino Pin -> Button -> Ground
 ```
 
 Uses internal pull-up.
-
+```text
 Idle:
 
 HIGH
@@ -115,7 +115,7 @@ HIGH
 Pressed:
 
 LOW
-
+```
 ---
 
 ## Toggle Pattern
