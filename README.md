@@ -21,13 +21,39 @@ Physically, it’s built into a black project enclosure with:
 - white and orange status LEDs
 - flush-mounted USB-C power
 
-This project is less about utility and more about physicalizing randomness.
+---
 
-Most random generators are invisible.
+## Why it exists
 
-This one has weight, light, switches, and a body.
+Entropy Box started with a simple idea:
 
-It makes randomness feel like something you interact with instead of something you call from software.
+what if we made a handheld entropy machine?
+
+That was the whole idea.
+
+Not because it was useful.
+
+Not because there was a problem to solve.
+
+Just because the idea of building a dedicated physical object around randomness felt interesting enough to justify itself.
+
+Most randomness in software is invisible.
+
+You call it and get an answer.
+
+This makes it physical.
+
+You wake it up.
+
+You press a button.
+
+Your timing becomes part of the output.
+
+The room becomes part of the output.
+
+The machine itself becomes part of the output.
+
+That was the point.
 
 ---
 
@@ -76,11 +102,26 @@ Current entropy inputs:
 
 These are continuously mixed into an entropy pool and used to reseed the generator.
 
+This means output is influenced by:
+
+- ambient electrical noise
+- nearby electronics
+- human interaction timing
+- internal system timing
+
+No two moments are exactly the same.
+
 ---
 
 ## Build
 
 Built on an Arduino Uno with an SSD1309 OLED.
+
+The Uno was originally just sitting around unused.
+
+It was free, oversized, and never seemed like the right fit for anything.
+
+Entropy Box ended up being the project that finally gave it a purpose.
 
 Hand-wired.
 
@@ -90,9 +131,7 @@ Hand-filed.
 
 The enclosure and layout were designed physically first, then solved around the constraints of the hardware.
 
-Nothing is simulated.
-
-Everything is embodied.
+Finished mattered more than perfect.
 
 ---
 
@@ -101,5 +140,4 @@ See:
 - `HARDWARE.md`
 - `WIRING.md`
 - `SOFTWARE.md`
-- `PHILOSOPHY.md`
 - `BUILD_LOG.md`
