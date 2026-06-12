@@ -139,3 +139,9 @@ The OLED runs in paged buffer mode to reduce SRAM use and improve stability.
 ## License
 
 [MIT License](LICENSE)
+
+---
+
+Built under Feral Engineering.
+
+![Feral Engineering Mark](images/feral-mark.png)
