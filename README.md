@@ -145,9 +145,9 @@ Finished mattered more than perfect.
 
 ---
 
-See:
+## Documentation
 
-- `HARDWARE.md`
-- `WIRING.md`
-- `SOFTWARE.md`
-- `BUILD_LOG.md`
+- [Hardware](HARDWARE.md)
+- [Wiring](WIRING.md)
+- [Software](SOFTWARE.md)
+- [Build Log](BUILD_LOG.md)
