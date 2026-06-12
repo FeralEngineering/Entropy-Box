@@ -14,6 +14,8 @@ Main controller.
 
 Uses an Arduino Uno for system control, input handling, entropy mixing, and display rendering.
 
+A smaller board could be substituted, but the current enclosure and wiring layout are built around the Uno form factor.
+
 ---
 
 ## Display
