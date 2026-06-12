@@ -147,8 +147,8 @@ Finished mattered more than perfect.
 
 ## Documentation
 
-[Hardware](docs/HARDWARE.md)
-[Wiring](docs/wiring/WIRING.md)
-[Wiring Diagram](docs/wiring/WIRING_DIAGRAM.md)
-[Software](docs/SOFTWARE.md)
-[Build Log](docs/BUILD_LOG.md)
+- [Hardware](docs/HARDWARE.md)
+- [Wiring](docs/wiring/WIRING.md)
+- [Wiring Diagram](docs/wiring/WIRING_DIAGRAM.md)
+- [Software](docs/SOFTWARE.md)
+- [Build Log](docs/BUILD_LOG.md)
