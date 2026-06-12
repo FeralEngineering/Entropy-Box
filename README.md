@@ -1,10 +1,10 @@
 # Entropy Box
 
-![Entropy Box Final](images/entropy-box-final.jpg)
+![Entropy Box Final](images/entropy-box-final.JPG)
 
 ---
 
-![Entropy Box Prototype](images/entropy-box-prototype.jpg)
+![Entropy Box Prototype](images/entropy-box-prototype.JPG)
 
 Prototype phase before enclosure, during breadboard testing and UI development.
 
