@@ -152,3 +152,37 @@ Finished mattered more than perfect.
 - [Wiring Diagram](docs/wiring/WIRING_DIAGRAM.md)
 - [Software](docs/SOFTWARE.md)
 - [Build Log](docs/BUILD_LOG.md)
+
+---
+
+## Gallery
+
+### Standby
+
+![Entropy Box Standby](images/entropy-box-standby.jpg)
+
+### Stream Mode
+
+![Entropy Box Stream](images/entropy-box-stream.jpg)
+
+### Password Mode
+
+![Entropy Box Password](images/entropy-box-password.jpg)
+
+### Visual Mode
+
+![Entropy Box Visual](images/entropy-box-visual.jpg)
+
+### Side Profile
+
+![Entropy Box Side](images/entropy-box-side.jpg)
+
+### USB-C Port
+
+![Entropy Box USB-C](images/entropy-box-usbc.jpg)
+
+---
+
+##License
+
+- MIT
