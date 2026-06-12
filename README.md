@@ -1,10 +1,14 @@
 # Entropy Box
 
-![Entropy Box Final](images/entropy-box-final.JPG)
+<p align="center">
+  <img src="images/entropy-box-final.JPG" width="700">
+</p>
 
 ---
 
-![Entropy Box Prototype](images/entropy-box-prototype.JPG)
+<p align="center">
+  <img src="images/entropy-box-prototype.JPG" width="500">
+</p>
 
 Prototype phase before enclosure, during breadboard testing and UI development.
 
@@ -110,29 +114,18 @@ The OLED runs in paged buffer mode to reduce SRAM use and improve stability.
 
 ## Gallery
 
-### Standby
-
-![Entropy Box Standby](images/entropy-box-standby.jpg)
-
-### Stream Mode
-
-![Entropy Box Stream](images/entropy-box-stream.jpg)
-
-### Password Mode
-
-![Entropy Box Password](images/entropy-box-password.jpg)
-
-### Visual Mode
-
-![Entropy Box Visual](images/entropy-box-visual.jpg)
-
-### Side Profile
-
-![Entropy Box Side](images/entropy-box-side.jpg)
-
-### USB-C Port
-
-![Entropy Box USB-C](images/entropy-box-usbc.jpg)
+<table align="center">
+<tr>
+<td><img src="images/entropy-box-standby.jpg" width="250"></td>
+<td><img src="images/entropy-box-stream.jpg" width="250"></td>
+<td><img src="images/entropy-box-password.jpg" width="250"></td>
+</tr>
+<tr>
+<td><img src="images/entropy-box-visual.jpg" width="250"></td>
+<td><img src="images/entropy-box-side.jpg" width="250"></td>
+<td><img src="images/entropy-box-usbc.jpg" width="250"></td>
+</tr>
+</table>
 
 ---
 
