@@ -10,98 +10,30 @@ Prototype phase before enclosure, during breadboard testing and UI development.
 
 ---
 
-Entropy Box is a handheld entropy-driven device built around the idea of harvesting unstable input from the physical world and turning it into usable randomness.
+Entropy Box is a handheld random output device built on an Arduino Uno.
 
-At its core, it mixes analog noise, timer jitter, and human interaction timing into an evolving entropy pool, then uses that pool to generate output.
+It collects analog noise, timer jitter, and button timing data, mixes them into an entropy pool, and uses that pool to generate output.
 
-It has three modes:
+It has three operating modes:
 
 - **Stream** — continuous random character generation  
 - **Password** — generates 16-character passwords  
 - **Visual** — renders randomized abstract patterns  
 
-The device uses a floating analog pin as an entropy probe, sampling environmental electrical noise and combining it with button timing and internal clock variance.
+The current build uses:
 
-Physically, it’s built into a black project enclosure with:
-
-- a centered OLED display
-- five breathing crown LEDs
-- three stainless steel mode buttons
-- a side-mounted toggle
+- 128x64 SSD1309 OLED display
+- five top-mounted LEDs
+- three stainless steel momentary buttons
+- side-mounted toggle switch
 - white and orange status LEDs
-- flush-mounted USB-C power
+- side-mounted USB-C power
 
 ---
 
-## Why it exists
+## How It Works
 
-Entropy Box started with a simple idea:
-
-what if we made a handheld entropy machine?
-
-That was the whole idea.
-
-Not because it was useful.
-
-Not because there was a problem to solve.
-
-Just because the idea of building a dedicated physical object around randomness felt interesting enough to justify itself.
-
-Most randomness in software is invisible.
-
-You call it and get an answer.
-
-This makes it physical.
-
-You wake it up.
-
-You press a button.
-
-Your timing becomes part of the output.
-
-The room becomes part of the output.
-
-The machine itself becomes part of the output.
-
-That was the point.
-
----
-
-## Modes
-
-### Mode 1 — Stream
-
-Outputs a continuous stream of randomized characters.
-
-Can be started and stopped at will.
-
-Useful for observing live entropy output over time.
-
----
-
-### Mode 2 — Password
-
-Generates a new 16-character password on each activation.
-
-Stores the last three generated passwords on screen.
-
----
-
-### Mode 3 — Visual
-
-Builds randomized visual compositions from:
-
-- pixel noise
-- blocks
-- lines
-
-Each press generates a new pattern.
-
----
-
-## Entropy Sources
-
-Current entropy inputs:
+Entropy Box uses multiple entropy sources:
 
 - floating analog input (A0)
 - repeated analog sampling
@@ -110,38 +42,59 @@ Current entropy inputs:
 - button press timing
 - button hold duration
 
-These are continuously mixed into an entropy pool and used to reseed the generator.
+These values are mixed into an internal entropy pool and used to reseed the random generator.
 
-This means output is influenced by:
-
-- ambient electrical noise
-- nearby electronics
-- human interaction timing
-- internal system timing
-
-No two moments are exactly the same.
+Output is influenced by both electrical noise and user interaction timing.
 
 ---
 
-## Build
+## Modes
 
-Built on an Arduino Uno with an SSD1309 OLED.
+### Stream
 
-The Uno was originally just sitting around unused.
+Outputs a continuous stream of randomized characters.
 
-It was free, oversized, and never seemed like the right fit for anything.
+Can be started and stopped manually.
 
-Entropy Box ended up being the project that finally gave it a purpose.
+Used for observing live output over time.
 
-Hand-wired.
+---
 
-Hand-drilled.
+### Password
 
-Hand-filed.
+Generates a new 16-character password each time it is activated.
 
-The enclosure and layout were designed physically first, then solved around the constraints of the hardware.
+Stores the last three generated passwords on screen.
 
-Finished mattered more than perfect.
+---
+
+### Visual
+
+Builds randomized visual compositions from:
+
+- pixel noise
+- blocks
+- diagonal lines
+
+Each activation generates a new pattern.
+
+---
+
+## Hardware
+
+Built on:
+
+- Arduino Uno
+- SSD1309 OLED
+- 3 momentary pushbuttons
+- 5 LEDs
+- 1 toggle switch
+- USB-C power adapter
+- project enclosure
+
+The final layout was designed around the physical dimensions of the enclosure and available hardware.
+
+The OLED runs in paged buffer mode to reduce SRAM use and improve stability.
 
 ---
 
