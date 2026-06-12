@@ -4,7 +4,7 @@ This is the physical wiring layout of Entropy Box.
 
 Simplified for clarity.
 
-Use this alongside `WIRING.md`.
+Use this alongside [WIRING.md](WIRING.md)
 
 ---
 
