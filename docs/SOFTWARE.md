@@ -94,8 +94,8 @@ INPUT_PULLUP
 State:
 
 ```text
-HIGH = standby/off
-LOW = active/on
+HIGH = off
+LOW = on
 ```
 
 When switched on:
