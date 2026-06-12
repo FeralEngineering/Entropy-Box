@@ -142,6 +142,8 @@ The OLED runs in paged buffer mode to reduce SRAM use and improve stability.
 
 ---
 
-Built under Feral Engineering.
-
-![Feral Engineering Mark](images/feral-mark.png)
+<p align="center">
+  Built under Feral Engineering.
+  <br>
+  <img src="images/feral-mark.png" width="222">
+</p>
