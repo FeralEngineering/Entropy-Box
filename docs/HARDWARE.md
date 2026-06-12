@@ -12,17 +12,7 @@ Some parts can be swapped, but the overall structure matters.
 
 Main controller.
 
-Chosen because:
-
-- it was already on hand
-- it was free
-- it wasn’t doing anything else
-
-Originally this board was just kind of sitting around.
-
-Entropy Box became the project that finally gave it a purpose.
-
-A smaller board would work, but the oversized Uno contributes to the final object’s physical weight and internal layout.
+Uses an Arduino Uno for system control, input handling, entropy mixing, and display rendering.
 
 ---
 
