@@ -6,7 +6,7 @@
 #endif
 
 // ---------- DISPLAY OBJECT ----------
-// Paged buffer constructor (lower RAM); this is the one your lib has.
+// Paged buffer constructor keeps SRAM usage low on the Uno.
 U8G2_SSD1309_128X64_NONAME0_1_HW_I2C u8g2(U8G2_R0, U8X8_PIN_NONE);
 
 // ---------- PIN DEFINITIONS ----------
@@ -58,7 +58,7 @@ const unsigned long LONG_PRESS_MS = 800;
 
 // ---------- ENTROPY POOL ----------
 uint32_t entropyPool = 0;
-uint8_t  entropyLevel = 0;           // 0..255; decay is still tracked
+uint8_t  entropyLevel = 0;           // internal activity level, not displayed
 unsigned long lastEntropyDecay = 0;
 const unsigned long ENTROPY_DECAY_MS = 80;
 
@@ -79,7 +79,7 @@ uint8_t pwdCount = 0;
 
 // ---------- STANDBY GLITCH WINDOW ----------
 unsigned long lastStandbyRefresh = 0;
-// Slower refresh so breathing LEDs stay smooth-ish
+// Slow refresh to reduce display redraw load.
 const unsigned long STANDBY_GLITCH_INTERVAL_MS = 1500; // ms between glitch redraws
 
 // ---------- FORWARD DECLARATIONS ----------
