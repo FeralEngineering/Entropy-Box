@@ -1,5 +1,15 @@
 # Entropy Box
 
+![Entropy Box Final](images/entropy-box-final.jpg)
+
+---
+
+![Entropy Box Prototype](images/entropy-box-prototype.jpg)
+
+Prototype phase before enclosure, during breadboard testing and UI development.
+
+---
+
 Entropy Box is a handheld entropy-driven device built around the idea of harvesting unstable input from the physical world and turning it into usable randomness.
 
 At its core, it mixes analog noise, timer jitter, and human interaction timing into an evolving entropy pool, then uses that pool to generate output.
