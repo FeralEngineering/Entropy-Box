@@ -1,143 +1,123 @@
 # Build Log
 
-This is the build history of Entropy Box.
+Build history for Entropy Box.
 
 ---
 
-## Phase 1 — The Idea
+## Phase 1 — Initial Concept
 
-Started with a simple question:
+The project began as a dedicated handheld random output device built around physical entropy sources.
 
-what if we made a handheld entropy machine? (And finally found a use for this Arduino Uno...)
+Initial goals:
 
-That was the whole thing.
+- collect unstable analog input
+- mix timing variation into a shared entropy pool
+- generate visible outputs from that pool
 
-No larger plan.
-
-Just the idea of building a dedicated object whose only purpose was to gather unstable inputs and turn them into output.
-
-Started rough.
-
-Got weirder as it went.
+The Arduino Uno was selected as the base platform because it was already available and had enough I/O for the planned layout.
 
 ---
 
 ## Phase 2 — Breadboard Prototype
 
-Initial prototype was built on breadboard using:
+Initial prototype used:
 
 - Arduino Uno
-- OLED
-- cheap square tactile buttons
+- SSD1309 OLED
+- temporary tactile buttons
 - loose LEDs
-- floating A0 entropy wire
+- floating A0 entropy lead
 
-This was where the basic system got worked out:
+This phase established:
 
 - mode switching
 - entropy collection
-- random stream generation
+- stream generation
 - password generation
-- visual mode
+- visual mode rendering
 
-The core architecture was established here.
+Core logic was developed and tested here.
 
 ---
 
-## Phase 3 — UI Expansion
+## Phase 3 — UI Iteration
 
-A lot of UI experiments happened early.
-
-Tried:
+Several display elements were tested during development, including:
 
 - entropy bars
-- lightning glyphs
-- denser glitch fields
-- heavier visual layers
-- more aggressive standby animations
+- symbol indicators
+- larger glitch fields
+- denser visual layers
+- faster standby animation
 
-Most of it got removed.
+These were reduced or removed to simplify rendering and improve readability.
 
-Simpler ended up stronger.
+Final UI prioritized:
 
-Final UI became:
-
-- cleaner
-- more stable
-- easier to read
-- more consistent with the physical build
+- stability
+- clarity
+- lower memory use
 
 ---
 
-## Phase 4 — Memory Problems
+## Phase 4 — Memory Optimization
 
-Big problem.
+Initial display code used full framebuffer mode.
 
-Original display setup used the full framebuffer.
+Measured SRAM usage:
 
-Memory usage was around:
-
+```text
 ~94%
+```
 
 This caused:
 
 - instability
-- broken rendering
-- freezing
-- visual corruption
+- rendering corruption
+- freezes
 
-Fix:
+The display was switched to U8G2 paged buffer mode.
 
-switched to U8G2 paged buffer mode.
+Measured SRAM usage after change:
 
-Memory dropped to:
-
+```text
 ~49%
+```
 
-This was the major software fix.
-
-Without it the build probably would have stayed unstable.
+This resolved the stability issues.
 
 ---
 
-## Phase 5 — Hardware Upgrade
+## Phase 5 — Button Replacement
 
-Original tactile buttons got replaced.
+The original temporary tactile buttons were replaced with 12mm stainless steel momentary pushbuttons.
 
-Final buttons became:
+This improved:
 
-12mm stainless momentary buttons.
-
-Huge improvement.
-
-This changed:
-
-- feel
 - durability
-- visual quality
-
-At this point the build started feeling like an object instead of a prototype.
+- input feel
+- enclosure fit
 
 ---
 
 ## Phase 6 — Layout Planning
 
-The enclosure layout was planned physically first.
+The enclosure layout was planned using paper templates.
 
-Paper templates were made for:
+Templates were made for:
 
 - OLED visible area
 - OLED PCB footprint
-- button diameters
-- LED bezel diameters
+- button diameter
+- LED bezel diameter
 
-This prevented major spacing mistakes.
+This was used to verify spacing before drilling.
 
 ---
 
 ## Phase 7 — Enclosure Work
 
-All holes were hand cut.
+All enclosure cuts were done by hand.
 
 Methods:
 
@@ -149,102 +129,77 @@ Round holes:
 
 OLED window:
 
-- four corner holes
+- corner drill points
 - center removal
-- hand filing to final shape
+- hand filing to final dimensions
 
-Final cuts included:
+Final cuts:
 
-Top face:
+Top panel:
 
-- 5 pink LEDs
+- 5 LED holes
 - OLED window
-- 3 buttons
+- 3 button holes
 
-Side wall:
+Side panel:
 
-- toggle
+- toggle switch
 - white LED
 - orange LED
-- USB-C port
-
-This was the most irreversible phase.
+- USB adapter opening
 
 ---
 
-## Phase 8 — Harness Build
+## Phase 8 — Internal Wiring
 
-Everything was hand-wired.
+The unit was fully hand-wired.
 
-Built in groups:
+Wiring groups:
 
-- pink LED signal wires
-- pink LED ground bundle
-- button ground bundle
-- status LED wiring
-- OLED power/signal
+- pink LED signal lines
+- pink LED ground bus
+- button ground bus
+- status LEDs
+- OLED power and I2C
 - toggle wiring
 
-Ground bus built after physical mounting.
-
-Had to be done this way because LED bezels load from the front.
-
-The enclosure dictated the assembly order.
+Assembly order was determined by enclosure access and front-loaded LED bezels.
 
 ---
 
-## Phase 9 — USB-C Conversion
+## Phase 9 — USB-C Adapter Installation
 
-The Uno’s USB-B port sat recessed too far into the enclosure.
+The Arduino Uno’s USB-B port sat recessed too far inside the enclosure for direct access.
 
-Would have required an ugly oversized access hole.
+A USB-B to USB-C adapter was installed through the side wall to provide external power access.
 
-Fix:
-
-USB-B to USB-C adapter.
-
-Flush mounted through side wall.
-
-Hot glued in place.
-
-Cleaner, better.
+The adapter extends slightly outward from the enclosure.
 
 ---
 
 ## Phase 10 — Final Assembly
 
-Final mounting:
+Final assembly included:
 
-- Uno hot glued
-- OLED hot glued
-- USB-C adapter hot glued
-- buttons locked with nuts
-- LEDs mounted in stainless bezels
+- mounting the Uno
+- mounting the OLED
+- securing the USB adapter
+- locking buttons in place
+- installing LEDs and bezels
+- completing the ground bus
 
-Final ground bus completed.
-
-Everything plugged in.
-
-Everything worked.
-
-First try...
-
-Rare.
+The system powered on and functioned correctly after assembly.
 
 ---
 
 ## Final Notes
 
-Known imperfections:
+Current build notes:
 
-- OLED mounted *slightly* crooked
-- pink LEDs are brighter than intended
-- some cuts could be cleaner...
+- OLED is mounted slightly off-center
+- pink LEDs are brighter than originally intended
+- enclosure cuts show minor hand-fit variation
 
-No rebuild planned.
+No major rebuilds are planned.
 
-Those imperfections belong to the object now.
-
-Final result came out almost exactly like the original paper layout.
-
-That almost never happens.
+The current unit is considered the finished working build.
