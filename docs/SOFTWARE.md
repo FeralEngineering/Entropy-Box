@@ -2,8 +2,6 @@
 
 This file documents the internal logic of Entropy Box.
 
-The system is built around state transitions, entropy mixing, and mode-specific output generation.
-
 The code runs on an Arduino Uno using the U8G2 display library.
 
 ---
@@ -14,21 +12,19 @@ Main code sections:
 
 - pin definitions
 - mode state
-- breathing animation
+- LED animation
 - button handling
-- entropy system
+- entropy collection
 - mode logic
 - display rendering
 
-The system is event-driven.
-
-It spends most of its life waiting for interaction.
+The system is event-driven and waits for user input between actions.
 
 ---
 
 ## State System
 
-Entropy Box has four states:
+Entropy Box has four operating states:
 
 ```cpp
 MODE_STANDBY
@@ -57,11 +53,11 @@ Waiting for input.
 
 ### Stream
 
-Continuous random character output.
+Outputs a continuous stream of randomized characters.
 
-Updates on interval.
+Updates on a fixed interval.
 
-Can be toggled on/off.
+Can be toggled on and off.
 
 ---
 
@@ -69,71 +65,69 @@ Can be toggled on/off.
 
 Generates 16-character passwords.
 
-Stores the last three.
+Stores the last three generated passwords.
 
-Generates only on demand.
+Runs only when triggered.
 
 ---
 
 ### Visual
 
-Builds randomized visual compositions.
+Generates randomized visual compositions.
 
-Static image generation.
+Each activation builds a new image.
 
-New pattern on each press.
+No persistence.
 
 ---
 
 ## Wake Logic
 
-Wake is controlled by the toggle switch.
+Wake state is controlled by the side toggle switch.
 
 Uses:
 
-```cpp id="zrvshw"
+```cpp
 INPUT_PULLUP
 ```
 
-Meaning:
+State:
 
-```text id="kntwln"
-HIGH = off
-LOW = on
+```text
+HIGH = standby/off
+LOW = active/on
 ```
 
-Wake behavior:
+When switched on:
 
-Toggle ON:
-
-- OLED powers up
+- OLED wakes
 - orange LED turns on
-- enters standby
+- system enters standby
 
-Toggle OFF:
+When switched off:
 
 - OLED sleeps
-- orange LED off
-- pink LEDs off
+- orange LED turns off
+- pink LEDs stop
 
-White LED remains powered.
+The white side LED remains powered directly from 5V.
 
 ---
 
 ## Button Logic
 
-Buttons are debounced.
+Buttons use debounce logic.
 
-Debounce time:
+Debounce interval:
 
-```cpp id="p7k0lu"
+```cpp
 150ms
 ```
 
 Each button tracks:
 
-- last state
-- press time
+- previous state
+- press start time
 
 Used for:
 
@@ -155,63 +149,58 @@ Used for:
 
 Threshold:
 
-```cpp id="fjlwm6"
+```cpp
 800ms
 ```
 
 Long press from any mode:
 
-Returns to standby.
-
-Stops stream mode.
+- returns to standby
+- stops stream mode if active
 
 ---
 
-## Breathing System
+## LED System
 
-The five pink LEDs use PWM breathing.
+The five top LEDs use PWM breathing.
 
 Pins:
 
-```text id="rddtto"
+```text
 3, 5, 6, 9, 10
 ```
 
 Behavior:
 
-- rises from 0 → 255
-- falls from 255 → 0
-- loops continuously
+- brightness ramps up from 0 to 255
+- brightness ramps down from 255 to 0
+- repeats continuously
 
 Update interval:
 
-```cpp id="fjlwm6"
+```cpp
 15ms
 ```
 
 Step size:
 
-```cpp id="kprn80"
+```cpp
 2
 ```
 
-Pure atmosphere.
-
-No information.
+The breathing LEDs are decorative and are not tied to system state.
 
 ---
 
 ## Entropy System
 
-This is the core of the machine.
+Entropy is stored in:
 
-Entropy is accumulated into:
-
-```cpp id="yxnq1q"
+```cpp
 uint32_t entropyPool
 ```
 
-This pool is continuously mixed and reused.
+This pool is continuously mixed and used for reseeding.
 
 ---
 
@@ -221,35 +210,30 @@ This pool is continuously mixed and reused.
 
 Uses:
 
-```cpp id="r9w7o4"
+```cpp
 analogRead(A0)
 ```
 
-A0 is left floating.
+A0 is intentionally left floating.
 
-This picks up:
-
-- ambient electrical noise
-- EMI
-- body capacitance
-- nearby electronics
+This allows it to pick up variable analog noise from the surrounding electrical environment.
 
 ---
 
 ### Repeated analog sampling
 
-Instead of one read:
+Uses:
 
-```cpp id="3n53v2"
+```cpp
 stirFromAnalog(samples)
 ```
 
-Samples multiple times:
+Sampling count:
 
-- 8 on startup
+- 8 during startup
 - 4 before mode generation
 
-This improves variability.
+This increases variability.
 
 ---
 
@@ -257,13 +241,11 @@ This improves variability.
 
 Uses:
 
-```cpp id="p1a9yz"
+```cpp
 micros()
 ```
 
-Mixed into the pool alongside analog readings.
-
-Microsecond variance adds instability.
+Microsecond timing is mixed into the entropy pool.
 
 ---
 
@@ -271,13 +253,13 @@ Microsecond variance adds instability.
 
 Uses:
 
-```cpp id="vfek9u"
+```cpp
 millis()
 ```
 
 Used during:
 
-- setup
+- startup
 - reseeding
 - button release
 
@@ -285,59 +267,53 @@ Used during:
 
 ### Button timing
 
-Every button release adds:
+Each button release adds:
 
-```cpp id="b5u9r2"
+```cpp
 mixEntropy(now)
 ```
 
-Press timing becomes part of the entropy pool.
+This adds timing variation based on interaction.
 
 ---
 
 ### Hold duration
 
-Also adds:
+Button hold time also adds:
 
-```cpp id="4ntkkp"
+```cpp
 mixEntropy(held)
 ```
 
-Duration of interaction affects generation.
+This changes the entropy pool based on interaction length.
 
 ---
 
 ## Entropy Mixing
 
-Values are folded into the pool using:
+Values are mixed using:
 
 ```cpp
 entropyPool ^= v + 0x9e3779b9UL + (entropyPool << 6) + (entropyPool >> 2);
 ```
 
-Simple but effective.
-
-Keeps entropy moving.
-
-Prevents stale reseeds.
+This updates the pool with each new entropy input.
 
 ---
 
 ## Reseeding
 
-Before major generation:
+Before generation:
 
-```cpp id="dk3c1r"
+```cpp
 randomSeed(entropyPool ^ millis());
 ```
 
-This happens before:
+This occurs before:
 
-- stream start
+- stream mode
 - password generation
 - visual generation
-
-Randomness is constantly refreshed.
 
 ---
 
@@ -345,14 +321,14 @@ Randomness is constantly refreshed.
 
 Uses:
 
-```cpp id="s1nwr0"
+```cpp
 STREAM_COLS = 18
 STREAM_ROWS = 3
 ```
 
 Maintains a rolling character buffer.
 
-Characters come from:
+Character source includes:
 
 - letters
 - numbers
@@ -360,7 +336,7 @@ Characters come from:
 
 Update interval:
 
-```cpp id="mdmmtw"
+```cpp
 70ms
 ```
 
@@ -368,22 +344,22 @@ Update interval:
 
 ## Password Mode
 
-Creates:
+Generates:
 
-```cpp id="r84l7t"
+```cpp
 16-character strings
 ```
 
-Character set:
+Character set includes:
 
-- uppercase
-- lowercase
+- uppercase letters
+- lowercase letters
 - numbers
 - symbols
 
 Stores:
 
-```cpp id="j1s0jx"
+```cpp
 last 3 passwords
 ```
 
@@ -391,11 +367,11 @@ last 3 passwords
 
 ## Visual Mode
 
-Generates layered randomized images:
+Builds layered randomized images:
 
 ### Layer 1
 
-Static / starfield
+Pixel noise / starfield
 
 ---
 
@@ -411,58 +387,32 @@ Diagonal glitch lines
 
 Each activation builds a new composition.
 
-No persistence.
-
 ---
 
 ## Display System
 
-Uses:
+Uses U8G2 paged buffer mode.
 
-U8G2 paged buffer mode.
+The original full framebuffer implementation used too much SRAM and caused instability.
 
-Important.
+Switching to paged mode reduced memory use from:
 
-Original full buffer caused memory issues.
-
-Paged mode reduced memory use from:
-
-```text id="x5v4be"
+```text
 ~94% → ~49%
 ```
 
-This was a critical stability fix.
+This resolved display corruption and freezes.
 
 ---
 
 ## Standby Glitch Window
 
-Standby includes a small 4x4 block-grid glitch field.
+Standby includes a small 4x4 animated block grid.
 
 Refresh interval:
 
-```cpp id="vrk4z2"
+```cpp
 1500ms
 ```
 
-Purely aesthetic.
-
-Used to give standby some movement.
-
----
-
-## Design Notes
-
-Entropy Box is intentionally simple.
-
-No networking.
-
-No storage.
-
-No logging.
-
-No external APIs.
-
-It only exists in the moment it is being used.
-
-That was intentional.
+This is a visual-only element.
