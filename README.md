@@ -4,6 +4,8 @@
 
 ![Status](https://img.shields.io/badge/status-active-green)
 
+![Platform](https://img.shields.io/badge/platform-Arduino-blue)
+
 <p align="center">
   <img src="images/entropy-box-final.JPG" width="700">
 </p>
