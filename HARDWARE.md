@@ -178,6 +178,12 @@ Strongly recommended for enclosure builds.
 
 ### Black project box
 
+Dimensions:
+
+- Length: 156 mm
+- Width: 90 mm
+- Height: 60.5 mm
+
 Requirements:
 
 - removable lid
