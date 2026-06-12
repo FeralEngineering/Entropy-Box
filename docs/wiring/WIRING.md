@@ -2,9 +2,7 @@
 
 This is the exact wiring layout used in the finished Entropy Box build.
 
-No PCB.
-
-Everything is hand-wired.
+The current build uses direct hand wiring with no PCB.
 
 Ground and 5V are distributed through shared buses.
 
@@ -55,9 +53,7 @@ Meaning:
 - HIGH = off
 - LOW = on
 
-Not hard power.
-
-State control only.
+The toggle is used for software wake/sleep state control and does not disconnect power.
 
 ---
 
@@ -114,7 +110,7 @@ All five are PWM-controlled for breathing.
 | SDA | A4 |
 | SCL | A5 |
 
-I2C display.
+Display uses I2C communication.
 
 ---
 
@@ -130,13 +126,7 @@ Current build:
 A0 → floating wire
 ```
 
-No resistor.
-
-No ground.
-
-No shielding.
-
-Intentionally unstable.
+The entropy probe is left electrically floating with no pull-up, pull-down, or shielding.
 
 ---
 
@@ -163,7 +153,7 @@ all grounds → single bus → Uno GND
 
 ## 5V Split
 
-Only two components use direct 5V:
+The 5V rail is split to:
 
 - OLED VDD
 - White LED resistor
@@ -201,6 +191,6 @@ This build was assembled in phases:
 3. grounds grouped after physical mounting
 4. final bus soldered after enclosure fitment
 
-This mattered because the LED bezels had to be installed from the front of the enclosure before final bus joining.
+Assembly order was determined by enclosure access and front-mounted LED bezels.
 
 The enclosure dictated the wiring order.
