@@ -183,6 +183,6 @@ Finished mattered more than perfect.
 
 ---
 
-##License
+## License
 
 - MIT
