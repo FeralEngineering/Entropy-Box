@@ -108,13 +108,9 @@ Arduino Pin -> Button -> Ground
 
 Uses internal pull-up.
 ```text
-Idle:
+Idle: HIGH
 
-HIGH
-
-Pressed:
-
-LOW
+Pressed: LOW
 ```
 ---
 
