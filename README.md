@@ -185,4 +185,4 @@ Finished mattered more than perfect.
 
 ## License
 
-- MIT
+[MIT License](LICENSE)
